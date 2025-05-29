@@ -1,0 +1,1 @@
+export const BILL_TABLE_FIELDS = ['Id', 'Date', "Previous Units","Current Units", 'Total Units','Rate','Total', "Actions"]
