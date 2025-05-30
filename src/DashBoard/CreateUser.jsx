@@ -53,14 +53,17 @@ const CreateUser = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <Paper elevation={4} sx={{ p: 4, maxWidth: 420, mx: "auto", mt: 8 }}>
+      <Paper
+        elevation={4}
+        sx={{ p: 4, maxWidth: 420, mx: { xs: 1, sm: "auto" }, mt: 8 }}
+      >
         <Typography variant="h4" sx={{ mb: 4 }}>
           {selectedUser.id ? "Update User" : "Create User"}
         </Typography>
         <Grid container spacing={2}>
           <Grid size={12}>
             <TextField
-            autoFocus
+              autoFocus
               placeholder="Enter Name"
               type="text"
               fullWidth

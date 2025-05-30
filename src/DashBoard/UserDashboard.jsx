@@ -65,12 +65,32 @@ const UserDashboard = () => {
           </Typography>
           <Button
             variant="contained"
+            sx={{
+              display: {
+                xs: "none",
+                sm: "flex",
+              },
+            }}
             startIcon={<AddIcon />}
             onClick={() => {
               setOpen(true);
             }}
           >
             Create Bill
+          </Button>
+          <Button
+            variant="contained"
+            sx={{
+              display: {
+                xs: "block",
+                sm: "none",
+              },
+            }}
+            onClick={() => {
+              setOpen(true);
+            }}
+          >
+            <AddIcon />
           </Button>
         </Box>
         <Box sx={{ mt: 2, display: "flex" }}>
@@ -90,7 +110,7 @@ const UserDashboard = () => {
           </Button>
         </Box>
         <TableContainer>
-          <Table >
+          <Table>
             <TableHead>
               <TableRow>
                 {BILL_TABLE_FIELDS.map((th) => (

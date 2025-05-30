@@ -38,7 +38,17 @@ const CreateBill = ({ title = "Create Bill", openModalSet }) => {
       validateOnChange: false,
       validateOnBlur: false,
       validationSchema: yup.object({
-        currentUnits: yup.number().required("Enter Current Units").min(0),
+        currentUnits: yup
+          .number()
+          .required("Enter Current Units")
+          .test(
+            "valid currentUnits",
+            "Current Units should be greater than previous units.",
+            function (value) {
+              const { previousUnits } = this.parent;
+              return value > previousUnits;
+            }
+          ),
         previousUnits: yup.number().required("Enter Previous Units").min(0),
         rate: yup.number().required("Enter Rate").min(1),
       }),
@@ -51,14 +61,14 @@ const CreateBill = ({ title = "Create Bill", openModalSet }) => {
           })
         );
         resetForm();
-        toast.success('Bill Added SuccessFully.')
+        toast.success("Bill Added SuccessFully.");
         setOpen(false);
       },
     });
 
   const handleClose = () => {
     resetForm();
-    toast.success('Form closed !')
+    toast.success("Form closed !");
     setOpen(false);
   };
   return (
@@ -66,7 +76,7 @@ const CreateBill = ({ title = "Create Bill", openModalSet }) => {
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>{title}</DialogTitle>
         <form onSubmit={handleSubmit}>
-          <DialogContent sx={{ width: 520 }}>
+          <DialogContent sx={{ maxWidth: 520 }}>
             <TextField
               autoFocus
               margin="dense"

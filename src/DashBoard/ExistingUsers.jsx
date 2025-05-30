@@ -40,41 +40,53 @@ const ExistingUsers = () => {
       <Paper elevation={2} sx={{ maxWidth: 520 }}>
         <ol>
           {users &&
-            users.filter(user=>user.name.includes(input) || user.date.includes(input)).map((user) => (
-              <li key={user.id}>
-                <Paper
-                  elevation={3}
-                  sx={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    px: 2,
-                    my: 2,
-                    // boxShadow: "4px 0px 5px gray",
-                    cursor: "pointer",
-                  }}
-                  onClick={() => navigate(`/user?${user.id}`)}
-                >
-                  <Typography variant="h4" sx={{ fontSize: 18 }}>
-                    {user.name}
-                  </Typography>
-                  <Typography variant="overline" sx={{ fontSize: 16 }}>
-                    {user.date}
-                  </Typography>
-                  <Box sx={{ display: "flex" }}>
-                    <IconButton
-                      color="error"
-                      onClick={(e) => handleDelete(e, user.id)}
-                    >
-                      <DeleteIcon />
-                    </IconButton>
-                    <IconButton onClick={(e) => handleEdit(e, user)}>
-                      <EditIcon color="secondary" />
-                    </IconButton>
-                  </Box>
-                </Paper>
-              </li>
-            ))}
+            users
+              .filter(
+                (user) => user.name.includes(input) || user.date.includes(input)
+              )
+              .map((user) => (
+                <li key={user.id}>
+                  <Paper
+                    elevation={3}
+                    sx={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      px: 2,
+                      py:1,
+                      my: 2,
+                      // boxShadow: "4px 0px 5px gray",
+                      cursor: "pointer",
+                    }}
+                    onClick={() => navigate(`/user?${user.id}`)}
+                  >
+                   <Box sx={{display:'flex', justifyContent:'space-between', flex:1, alignItems:{
+                    sm :'center'
+                   }, flexDirection : {
+                    xs : 'column',
+                    sm : 'row'
+                   }}}>
+                     <Typography variant="h4" sx={{ fontSize: 16 }}>
+                      {user.name}
+                    </Typography>
+                    <Typography variant="overline" sx={{ fontSize: 16 }}>
+                      {user.date}
+                    </Typography>
+                   </Box>
+                    <Box sx={{ display: "flex" }}>
+                      <IconButton
+                        color="error"
+                        onClick={(e) => handleDelete(e, user.id)}
+                      >
+                        <DeleteIcon />
+                      </IconButton>
+                      <IconButton onClick={(e) => handleEdit(e, user)}>
+                        <EditIcon color="secondary" />
+                      </IconButton>
+                    </Box>
+                  </Paper>
+                </li>
+              ))}
         </ol>
         <ErrorBoundry
           fallback={
